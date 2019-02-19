@@ -33,6 +33,7 @@ body {
 .carousel__track-container {
   grid-column: 2;
   align-self: stretch;
+  overflow: hidden;
 }
 
 .carousel__track {
@@ -70,6 +71,10 @@ body {
 
 .carousel__button:hover svg {
   fill: var(--color-hover-state);
+}
+
+.is-hidden {
+  display: none;
 }
 
 /**
