@@ -14,7 +14,7 @@ slides.forEach((slide, index) => {
   slide.style.left = slideWidth * index + 'px';
 });
 
-//
+// Event listener for the Previous button
 prevButton.addEventListener('click', e => {
   const currentSlide = track.querySelector('.is-selected');
   const prevSlide = currentSlide.previousElementSibling;
@@ -39,7 +39,7 @@ prevButton.addEventListener('click', e => {
 
 });
 
-//
+// Event listener for the Next button
 nextButton.addEventListener('click', e => {
   const currentSlide = track.querySelector('.is-selected');
   const nextSlide = currentSlide.nextElementSibling;
@@ -65,14 +65,13 @@ nextButton.addEventListener('click', e => {
 });
 
 
-
+// Event listener for the dots
 dots.forEach(dot => {
   dot.addEventListener('click', e => {
 
     const currentSlide = track.querySelector('.is-selected');
     const currentDot = dotsContainer.querySelector('.is-selected');
     const targetDot = dot;
-
     let targetIndex;
 
     for (let index = 0; index < dots.length; index++) {
@@ -80,6 +79,7 @@ dots.forEach(dot => {
         targetIndex = index;
       }
     }
+
     const targetSlide = slides[targetIndex];
 
     // Move to target slide
@@ -104,7 +104,5 @@ dots.forEach(dot => {
       prevButton.classList.remove('is-hidden')
       nextButton.classList.remove('is-hidden')
     }
-
-
   })
 })
