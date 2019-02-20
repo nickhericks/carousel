@@ -5,13 +5,10 @@
  :mag: Live version available at [nickhericks.github.io/carousel/](https://nickhericks.github.io/carousel/)
 
 ## What I learned
- -
+ - ```element.getBoundingClientRect()``` - How to access properties of an element related to the size of the element as well as it's position relative to the viewport.
 
 ```javascript
-
 const slideWidth = slides[0].getBoundingClientRect().width
-
-
 ```
 
 ## Acknowledgements
