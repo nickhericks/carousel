@@ -1,18 +1,17 @@
 const track = document.querySelector('.carousel__track');
 const slides = Array.from(track.children);
-// Get width of first slides
 const slideWidth = slides[0].getBoundingClientRect().width;
-
 const prevButton = document.querySelector('.jsPrevious');
 const nextButton = document.querySelector('.jsNext');
-
 const dotsContainer = document.querySelector('.carousel__nav');
 const dots = Array.from(dotsContainer.children);
+
 
 // Give each slide proper positioning based on slide width
 slides.forEach((slide, index) => {
 	slide.style.left = slideWidth * index + 'px';
 });
+
 
 // Event listener for the Previous button
 prevButton.addEventListener('click', e => {
@@ -23,7 +22,7 @@ prevButton.addEventListener('click', e => {
 	const currentDot = dotsContainer.querySelector('.is-selected');
 	const prevDot = currentDot.previousElementSibling;
 
-	track.style.left = '-' + amountToMove;
+	track.style.transform = 'translateX(-' + amountToMove + ')';
 
 	currentSlide.classList.remove('is-selected');
 	prevSlide.classList.add('is-selected');
@@ -38,6 +37,7 @@ prevButton.addEventListener('click', e => {
 	nextButton.classList.remove('is-hidden');
 });
 
+
 // Event listener for the Next button
 nextButton.addEventListener('click', e => {
 	const currentSlide = track.querySelector('.is-selected');
@@ -47,7 +47,7 @@ nextButton.addEventListener('click', e => {
 	const currentDot = dotsContainer.querySelector('.is-selected');
 	const nextDot = currentDot.nextElementSibling;
 
-	track.style.left = '-' + amountToMove;
+	track.style.transform = 'translateX(-' + amountToMove + ')';
 
 	currentSlide.classList.remove('is-selected');
 	nextSlide.classList.add('is-selected');
@@ -62,13 +62,9 @@ nextButton.addEventListener('click', e => {
 	prevButton.classList.remove('is-hidden');
 });
 
-dotsContainer.addEventListener('click', e => {
-	const targetDot = e.target.closest('button');
-	if (targetDot) {
-		// Do something
-	}
-});
 
+
+// Event listener for dots
 dotsContainer.addEventListener('click', e => {
 	const targetDot = e.target.closest('button');
 	if (targetDot) {
@@ -86,7 +82,7 @@ dotsContainer.addEventListener('click', e => {
 
 		// Move to target slide
 		const amountToMove = targetSlide.style.left;
-		track.style.left = '-' + amountToMove;
+		track.style.transform = 'translateX(-' + amountToMove + ')';
 		currentSlide.classList.remove('is-selected');
 		targetSlide.classList.add('is-selected');
 
