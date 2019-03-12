@@ -2,6 +2,12 @@ const setSlidePosition = (slide, index) => {
 	slide.style.left = slideWidth * index + 'px'
 }
 
+const getCurrentIndex = slides => {
+	return slides.findIndex(
+		slide => slide.classList.contains('is-selected')
+	)
+}
+
 const moveToSlide = (track, slides, currentIndex, targetIndex) => {
   const currentSlide = slides[currentIndex];
   const targetSlide = slides[targetIndex];
@@ -10,7 +16,9 @@ const moveToSlide = (track, slides, currentIndex, targetIndex) => {
   targetSlide.classList.add("is-selected");
 };
 
-const updateDots = (currentDot, targetDot) => {
+const updateDots = (dots, currentIndex, targetIndex) => {
+	const currentDot = dots[currentIndex]
+	const targetDot = dots[targetIndex]
 	currentDot.classList.remove('is-selected')
 	targetDot.classList.add('is-selected')
 }
@@ -44,28 +52,24 @@ slides.forEach(setSlidePosition);
 
 // Event listener for the Previous button
 prevButton.addEventListener('click', e => {
-	const currentIndex =
-		slides.findIndex(slide => slide.classList.contains('is-selected'))
-	const currentDot = dotsContainer.querySelector('.is-selected')
-	const prevDot = currentDot.previousElementSibling
+	const currentIndex = getCurrentIndex(slides)
+	const prevIndex = currentIndex - 1
 
-	moveToSlide(track, slides, currentIndex, currentIndex - 1)
-	showHideArrows(slides, prevButton, nextButton, currentIndex - 1)
-	updateDots(currentDot, nextDot)
+	moveToSlide(track, slides, currentIndex, prevIndex)
+	showHideArrows(slides, prevButton, nextButton, prevIndex)
+	updateDots(dots, currentIndex, prevIndex)
 })
 
 
 // Event listener for the Next button
 nextButton.addEventListener('click', e => {
-	const currentIndex = 
-			slides.findIndex(slide => slide.classList.contains('is-selected'));
-	const currentDot = dotsContainer.querySelector('.is-selected');
-	const nextDot = currentDot.nextElementSibling;
-	
-  moveToSlide(track, slides, currentIndex, currentIndex + 1)
-	showHideArrows(slides, prevButton, nextButton, currentIndex + 1);
-	updateDots(currentDot, nextDot)
-});
+	const currentIndex = getCurrentIndex(slides)
+	const nextIndex = currentIndex + 1
+
+	moveToSlide(track, slides, currentIndex, nextIndex)
+	showHideArrows(slides, prevButton, nextButton, nextIndex)
+	updateDots(dots, currentIndex, nextIndex)
+})
 
 
 // Event listener for dots
@@ -73,13 +77,10 @@ dotsContainer.addEventListener('click', e => {
 	const targetDot = e.target.closest('button')
 	if (!targetDot) return
 
-	const currentIndex = slides.findIndex(
-		slide => slide.classList.contains('is-selected')
-	)
-	const currentDot = dotsContainer.querySelector('.is-selected')
+	const currentIndex = getCurrentIndex(slides)
 	const targetIndex = dots.findIndex(dot => dot === targetDot)
 
 	moveToSlide(track, slides, currentIndex, targetIndex)
 	showHideArrows(slides, prevButton, nextButton, targetIndex)
-	updateDots(currentDot, targetDot)
+	updateDots(dots, currentIndex, targetIndex)
 })
