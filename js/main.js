@@ -36,7 +36,7 @@ const showHideArrows = (slides, prevButton, nextButton, targetIndex) => {
 	}
 };
 
-
+// Global variables
 const track = document.querySelector('.carousel__track');
 const slides = Array.from(track.children);
 const slideWidth = slides[0].getBoundingClientRect().width;
