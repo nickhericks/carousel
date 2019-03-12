@@ -1,3 +1,18 @@
+const setSlidePosition = (slide, index) => {
+	slide.style.left = slideWidth * index + 'px'
+}
+
+const moveToSlide = (track, currentSlide, targetSlide) => {
+  track.style.transform = `translateX(-${targetSlide.style.left})`;
+  currentSlide.classList.remove("is-selected");
+  targetSlide.classList.add("is-selected");
+};
+
+const updateDots = (currentDot, targetDot) => {
+	currentDot.classList.remove('is-selected')
+	targetDot.classList.add('is-selected')
+}
+
 const track = document.querySelector('.carousel__track');
 const slides = Array.from(track.children);
 const slideWidth = slides[0].getBoundingClientRect().width;
@@ -8,33 +23,28 @@ const dots = Array.from(dotsContainer.children);
 
 
 // Give each slide proper positioning based on slide width
-slides.forEach((slide, index) => {
-	slide.style.left = slideWidth * index + 'px';
-});
+slides.forEach(setSlidePosition);
 
 
 // Event listener for the Previous button
 prevButton.addEventListener('click', e => {
 	const currentSlide = track.querySelector('.is-selected');
 	const prevSlide = currentSlide.previousElementSibling;
-	const amountToMove = prevSlide.style.left;
-	const isFirstSlide = !prevSlide.previousElementSibling;
+	moveToSlide(track, currentSlide, prevSlide);
+
 	const currentDot = dotsContainer.querySelector('.is-selected');
 	const prevDot = currentDot.previousElementSibling;
+	updateDots(currentDot, prevDot)
 
-	track.style.transform = 'translateX(-' + amountToMove + ')';
 
-	currentSlide.classList.remove('is-selected');
-	prevSlide.classList.add('is-selected');
-
+	nextButton.classList.remove("is-hidden");
+	const isFirstSlide = !prevSlide.previousElementSibling;
 	if (isFirstSlide) {
 		prevButton.classList.add('is-hidden');
 	}
 
-	currentDot.classList.remove('is-selected');
-	prevDot.classList.add('is-selected');
 
-	nextButton.classList.remove('is-hidden');
+
 });
 
 
@@ -42,24 +52,22 @@ prevButton.addEventListener('click', e => {
 nextButton.addEventListener('click', e => {
 	const currentSlide = track.querySelector('.is-selected');
 	const nextSlide = currentSlide.nextElementSibling;
-	const amountToMove = nextSlide.style.left;
-	const isFinalSlide = !nextSlide.nextElementSibling;
+	moveToSlide(track, currentSlide, nextSlide);
+
 	const currentDot = dotsContainer.querySelector('.is-selected');
 	const nextDot = currentDot.nextElementSibling;
+	updateDots(currentDot, nextDot)
 
-	track.style.transform = 'translateX(-' + amountToMove + ')';
 
-	currentSlide.classList.remove('is-selected');
-	nextSlide.classList.add('is-selected');
-
+	
+	prevButton.classList.remove('is-hidden');
+	const isFinalSlide = !nextSlide.nextElementSibling;
 	if (isFinalSlide) {
 		nextButton.classList.add('is-hidden');
 	}
 
-	currentDot.classList.remove('is-selected');
-	nextDot.classList.add('is-selected');
 
-	prevButton.classList.remove('is-hidden');
+
 });
 
 
