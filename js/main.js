@@ -52,6 +52,7 @@ const makeDots = (carousel, slides) => {
 	});
 
 	carousel.appendChild(container);
+	return container;
 };
 
 
@@ -61,14 +62,13 @@ const carousel = document.querySelector('.carousel');
 const track = document.querySelector('.carousel__track');
 const slides = [...track.children];
 
-makeDots(carousel, slides);
+
+const dotsContainer = makeDots(carousel, slides);
 
 const slideWidth = slides[0].getBoundingClientRect().width;
-
-const dotsContainer = document.querySelector('.carousel__nav');
 const dots = [...dotsContainer.children];
-const nextButton = document.querySelector('.jsNext');
-const prevButton = document.querySelector('.jsPrev');
+const nextButton = carousel.querySelector(".jsNext");
+const prevButton = carousel.querySelector(".jsPrev");
 
 
 
