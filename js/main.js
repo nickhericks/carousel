@@ -67,8 +67,8 @@ const dotsContainer = makeDots(carousel, slides);
 
 const slideWidth = slides[0].getBoundingClientRect().width;
 const dots = [...dotsContainer.children];
-const nextButton = carousel.querySelector(".jsNext");
-const prevButton = carousel.querySelector(".jsPrev");
+const nextButton = carousel.querySelector('.jsNext');
+const prevButton = carousel.querySelector('.jsPrev');
 
 
 
