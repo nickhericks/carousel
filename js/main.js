@@ -36,14 +36,41 @@ const showHideArrows = (slides, prevButton, nextButton, targetIndex) => {
 	}
 };
 
+
+
+const makeDots = (carousel, slides) => {
+	const container = document.createElement('div');
+	container.classList.add('carousel__nav');
+
+	slides.forEach(slide => {
+		const dot = document.createElement('button');
+		dot.classList.add('carousel__dot');
+		if (slide.classList.contains('is-selected')) {
+			dot.classList.add('is-selected');
+		}
+		container.appendChild(dot);
+	});
+
+	carousel.appendChild(container);
+};
+
+
+
 // Global variables
+const carousel = document.querySelector('.carousel');
 const track = document.querySelector('.carousel__track');
-const slides = Array.from(track.children);
+const slides = [...track.children];
+
+makeDots(carousel, slides);
+
 const slideWidth = slides[0].getBoundingClientRect().width;
-const prevButton = document.querySelector('.jsPrevious');
-const nextButton = document.querySelector('.jsNext');
+
 const dotsContainer = document.querySelector('.carousel__nav');
-const dots = Array.from(dotsContainer.children);
+const dots = [...dotsContainer.children];
+const nextButton = document.querySelector('.jsNext');
+const prevButton = document.querySelector('.jsPrev');
+
+
 
 
 // Give each slide proper positioning based on slide width
