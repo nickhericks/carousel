@@ -1,6 +1,8 @@
 # Carousel component
 > A carousel component that allows for content to be shuffled through either at a set interval or actively by the user.
 
+<img src="https://res.cloudinary.com/dtqevfsxh/image/upload/v1565019154/portfolio/carousel.png" width="899">
+
 ## View project
  :mag: Live version available at [nickhericks.github.io/carousel/](https://nickhericks.github.io/carousel/)
 
